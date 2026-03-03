@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="login-container">
+    <h2>Login</h2>
+
+    <form id="loginForm">
+
+        <div class="input-group">
+            <label>Email</label>
+            <input type="text" id="email">
+            <small class="error" id="emailError"></small>
+        </div>
+
+        <div class="input-group">
+            <label>Password</label>
+            <input type="password" id="password">
+            <small class="error" id="passwordError"></small>
+        </div>
+
+        <button type="submit">Login</button>
+
+        <p id="successMessage" class="success"></p>
+
+    </form>
+</div>
+
+<script>
+
+    // Fake Database
+    const users = [
+        { email: "admin@gmail.com", password: "123456" },
+        { email: "student@gmail.com", password: "password" }
+    ];
+
+    const form = document.getElementById("loginForm");
+
+    form.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        // Get values
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value.trim();
+
+        // Clear old messages
+        document.getElementById("emailError").innerText = "";
+        document.getElementById("passwordError").innerText = "";
+        document.getElementById("successMessage").innerText = "";
+
+        let isValid = true;
+
+        // Email validation
+        if (email === "") {
+            document.getElementById("emailError").innerText = "Email is required";
+            isValid = false;
+        } 
+        else if (!email.includes("@")) {
+            document.getElementById("emailError").innerText = "Enter valid email";
+            isValid = false;
+        }
+
+        // Password validation
+        if (password === "") {
+            document.getElementById("passwordError").innerText = "Password is required";
+            isValid = false;
+        } 
+        else if (password.length < 6) {
+            document.getElementById("passwordError").innerText = "Minimum 6 characters required";
+            isValid = false;
+        }
+
+        // If validation passed
+        if (isValid) {
+
+            // Check credentials (Database simulation)
+            const user = users.find(u => u.email === email && u.password === password);
+
+            if (user) {
+                document.getElementById("successMessage").innerText = "Login Successful!";
+            } else {
+                document.getElementById("passwordError").innerText = "Invalid email or password";
+            }
+        }
+
+    });
+
+</script>
+
+</body>
+</html>
