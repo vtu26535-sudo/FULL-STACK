@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Activity Logger</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h2>User Activity</h2>
+
+<form action="insert.php" method="POST">
+
+<input type="text" name="username" placeholder="Enter Username" required>
+
+<select name="action">
+<option value="Login">Login</option>
+<option value="Logout">Logout</option>
+<option value="Purchase">Purchase</option>
+</select>
+
+<button type="submit">Submit</button>
+
+</form>
+
+<br>
+
+<a href="report.php">View Daily Report</a>
+
+</body>
+</html>
