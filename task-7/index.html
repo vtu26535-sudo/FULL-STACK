@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Feedback Form</title>
+
+<style>
+body{
+font-family: Arial;
+background:#f2f2f2;
+}
+
+form{
+width:350px;
+margin:100px auto;
+padding:20px;
+background:white;
+border-radius:8px;
+box-shadow:0 0 10px gray;
+}
+
+input, textarea{
+width:100%;
+padding:10px;
+margin:10px 0;
+border:1px solid gray;
+border-radius:5px;
+}
+
+button{
+padding:10px;
+width:100%;
+background:green;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+.highlight{
+border:2px solid blue;
+}
+
+.error{
+border:2px solid red;
+}
+
+.success{
+border:2px solid green;
+}
+
+</style>
+</head>
+
+<body>
+
+<h2 style="text-align:center;">Customer Feedback</h2>
+
+<form>
+
+<input type="text" id="name" placeholder="Enter your name">
+
+<input type="email" id="email" placeholder="Enter your email">
+
+<textarea id="message" placeholder="Enter your feedback"></textarea>
+
+<button type="button" ondblclick="submitForm()">Submit</button>
+
+</form>
+
+<script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Student Data Dashboard</h1>
+
+<!-- Controls -->
+<div class="controls">
+    
+    <!-- Sort -->
+    <label>Sort By:</label>
+    <select id="sortSelect" onchange="sortData()">
+        <option value="">Select</option>
+        <option value="name">Name</option>
+        <option value="date">Joining Date</option>
+    </select>
+
+    <!-- Filter -->
+    <label>Filter by Department:</label>
+    <select id="filterSelect" onchange="filterData()">
+        <option value="All">All</option>
+        <option value="CSE">CSE</option>
+        <option value="IT">IT</option>
+        <option value="ECE">ECE</option>
+    </select>
+
+</div>
+
+<!-- Table -->
+<table id="studentTable">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Department</th>
+            <th>Joining Date</th>
+        </tr>
+    </thead>
+    <tbody id="tableBody">
+    </tbody>
+</table>
+
+<!-- Department Count -->
+<h2>Department Count</h2>
+<ul id="departmentCount"></ul>
+
+<script>
+    const students = [
+        { name: "Arun", department: "CSE", date: "2023-06-10" },
+        { name: "Bala", department: "IT", date: "2022-07-12" },
+        { name: "Charan", department: "ECE", date: "2023-01-15" },
+        { name: "Divya", department: "CSE", date: "2021-09-20" },
+        { name: "Elan", department: "IT", date: "2022-11-05" }
+    ];
+
+    let filteredStudents = [...students];
+
+    function displayData(data) {
+        const tableBody = document.getElementById("tableBody");
+        tableBody.innerHTML = "";
+
+        data.forEach(student => {
+            let row = `<tr>
+                        <td>${student.name}</td>
+                        <td>${student.department}</td>
+                        <td>${student.date}</td>
+                       </tr>`;
+            tableBody.innerHTML += row;
+        });
+
+        countDepartments(data);
+    }
+
+    function sortData() {
+        const value = document.getElementById("sortSelect").value;
+
+        if (value === "name") {
+            filteredStudents.sort((a, b) => a.name.localeCompare(b.name));
+        } 
+        else if (value === "date") {
+            filteredStudents.sort((a, b) => new Date(a.date) - new Date(b.date));
+        }
+
+        displayData(filteredStudents);
+    }
+
+    function filterData() {
+        const dept = document.getElementById("filterSelect").value;
+
+        if (dept === "All") {
+            filteredStudents = [...students];
+        } else {
+            filteredStudents = students.filter(s => s.department === dept);
+        }
+
+        displayData(filteredStudents);
+    }
+
+    function countDepartments(data) {
+        const countList = document.getElementById("departmentCount");
+        countList.innerHTML = "";
+
+        let counts = {};
+
+        data.forEach(student => {
+            counts[student.department] = (counts[student.department] || 0) + 1;
+        });
+
+        for (let dept in counts) {
+            countList.innerHTML += `<li>${dept}: ${counts[dept]}</li>`;
+        }
+    }
+
+    // Load initial data
+    displayData(students);
+</script>
+
+</body>
+</html>
